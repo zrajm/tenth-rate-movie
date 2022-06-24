@@ -8,6 +8,10 @@
 <meta name=author content="zrajm">
 <meta name=description content="Some musings on Monty Python’s movie Life of Brian, and the hullabaloo it’s caused.">
 <link href="style.css" rel=stylesheet>
+<style>
+  iframe { background: #000 }
+  img[onclick] { cursor: pointer }
+</style>
 <div class=wrap>
   <article class=hentry>
 
@@ -39,7 +43,7 @@
         funny it was banned in Norway.”
 
       <figure>
-        <iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/TKPmGjVFbrY?rel=0" frameborder="0" allowfullscreen></iframe>
+        <img width="640" height="360" data-youtube-id="TKPmGjVFbrY">
         <figcaption>Trailer for <i>Life of Brian</i>. <nobr class=pale>(3
           minutes)</nobr></figcaption>
       </figure>
@@ -60,7 +64,7 @@
       </figure>
 
       <figure>
-        <iframe width="575" height="360" src="https://www.youtube-nocookie.com/embed/wthHB3iTC7M?rel=0" frameborder="0" allowfullscreen></iframe>
+        <img width="576" height="360" data-youtube-id="wthHB3iTC7M">
         <figcaption>Deleted scenes from <i>Life of Brian</i> (including Otto,
           the Nazirene). <nobr class=pale>(13½ minutes)</nobr></figcaption>
       </figure>
@@ -80,7 +84,7 @@
         reversal that seem to have been equally unexpected to both parties.)
 
       <figure>
-        <iframe width="480" height="360" src="https://www.youtube-nocookie.com/embed/CeKWVuye1YE?rel=0" frameborder="0" allowfullscreen></iframe>
+        <img width="480" height="360" data-youtube-id="CeKWVuye1YE">
         <figcaption>The episode of <i>Friday Night, Saturday Morning</i> with
           the Monty Python interview. <nobr class=pale>(1 hour, 6
           minutes)</nobr></figcaption>
@@ -101,7 +105,7 @@
         sake!).
 
       <figure>
-        <iframe width="480" height="360" src="https://www.youtube-nocookie.com/embed/asUyK6JWt9U?rel=0" frameborder="0" allowfullscreen></iframe>
+        <img width="480" height="360" data-youtube-id="asUyK6JWt9U">
         <figcaption>“General Synod’s <i>Life of Christ</i>” sketch on <i>Not
           the Nine O’Clock News</i> <nobr class=pale>(3½
           minutes)</nobr></figcaption>
@@ -118,7 +122,7 @@
         it.
 
       <figure>
-        <iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/hdU_6jUQI9s?rel=0" frameborder="0" allowfullscreen></iframe>
+        <img width="640" height="360" data-youtube-id="hdU_6jUQI9s">
         <figcaption><i>The Secret Life of Brian</i>
           (2007). <nobr class=pale>(54 minutes)</nobr></figcaption>
       </figure>
@@ -132,7 +136,7 @@
         sketch form.
 
       <figure>
-        <iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/xO3gFDMZLN0?rel=0" frameborder="0" allowfullscreen></iframe>
+        <img width="640" height="360" data-youtube-id="xO3gFDMZLN0">
         <figcaption>Trailer for <i>Holy Flying Circus</i> <nobr class=pale>(1½
           minute)</nobr></figcaption>
       </figure>
@@ -185,4 +189,19 @@
     </small></i>
   </footer>
 </div>
+<script>
+  // Replace target element with embedded Youtube video.
+  function loadVideo({ target }) {
+    const { width, height, dataset: { youtubeId: id }} = target
+    target.outerHTML = `<iframe width="${width}" height="${height}" `
+      + `src="https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1"`
+      + `frameborder="0" allowfullscreen></iframe>`
+  }
+  document.querySelectorAll('[data-youtube-id]').forEach(el => {
+    const { width, height, dataset: { youtubeId: id }} = el
+    el.setAttribute('onclick', 'loadVideo(event)')
+    el.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==')
+    el.setAttribute('style', `background: no-repeat bottom left url(video-icon.png), center/cover url(img-${id.toLowerCase()}.jpg)`)
+  })
+</script>
 <!--eof-->
