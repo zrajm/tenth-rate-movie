@@ -59,14 +59,14 @@ td, th {
     padding: 0 1em;
     vertical-align: top;
 }
-sup {
+sub, sup, a[href^="#fn"] {
+    font-size: .8em;
     line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    top: -1.15ex;
 }
-sup a {
-    color: #d93c44;
-    font-style: inherit;
-    text-decoration: inherit;
-}
+sub { top: 1ex; }
 footer {
     text-align: right;
     float: right;
